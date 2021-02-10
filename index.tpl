@@ -589,7 +589,7 @@
 				$('#slider').hide();
 			}
 
-		    $this.tab('show');
+		    tab('show');
 
 		    resetValues();
 
