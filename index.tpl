@@ -600,18 +600,18 @@
 	    $('#btnPrev').on('click', function (e) {
 			$('#year').text($('#year').text()-1);
 	    	if(tabSelected == "tabMonth"){
-				$('this').updateChartMonth ();				
+				updateChartMonth ();				
 			}else if(tabSelected == "tabYear"){
-				$('this').updateChartByYear ();
+				updateChartByYear ();
 			}else if(tabSelected == "tabByCountry"){
-				$('this').updateChartPaisesAbstract ();
-				$('this').updateChartPaisesDownload ();
+				updateChartPaisesAbstract ();
+				updateChartPaisesDownload ();
 			}else if(tabSelected == "tabArticleDownload"){
-				$('this').updateChartArticleDownload ();
+				updateChartArticleDownload ();
 			}else if(tabSelected == "tabArticleAbstract"){
-				$('this').updateChartArticleAbstract ();
+				updateChartArticleAbstract ();
 			}else if(tabSelected == "tabIssues"){
-				$('this').updateChartIssues ();
+				updateChartIssues ();
 			}
 	    	resetValues();
 	    });
@@ -619,18 +619,18 @@
 	    $('#btnNext').on('click', function (e) {
 			$("#year").text($('#year').text()-0+1);
 	    	if(tabSelected == "tabMonth"){
-				$('this').updateChartMonth ();				
+				updateChartMonth ();				
 			}else if(tabSelected == "tabYear"){
-				$('this').updateChartByYear ();
+				updateChartByYear ();
 			}else if(tabSelected == "tabByCountry"){
-				$('this').updateChartPaisesAbstract ();
-				$('this').updateChartPaisesDownload ();
+				updateChartPaisesAbstract ();
+				updateChartPaisesDownload ();
 			}else if(tabSelected == "tabArticleDownload"){
-				$('this').updateChartArticleDownload ();
+				updateChartArticleDownload ();
 			}else if(tabSelected == "tabArticleAbstract"){
-				$('this').updateChartArticleAbstract ();
+				updateChartArticleAbstract ();
 			}else if(tabSelected == "tabIssues"){
-				$('this').updateChartIssues ();
+				updateChartIssues ();
 			}
 			
 	    	resetValues();
