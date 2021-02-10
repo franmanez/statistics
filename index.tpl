@@ -508,11 +508,11 @@
 		 *         			 	EVENTS
 		 ***********************************************************/
 
-		$("#btn3D").bootstrapSwitch();
+		//$("#btn3D").bootstrapSwitch();
 
 		$("#slider").hide();
 
-		$('input[name="btn3D"]').on('switchChange.bootstrapSwitch', function(event, state) {
+		/*$('input[name="btn3D"]').on('switchChange.bootstrapSwitch', function(event, state) {
 			optionsMonth.chart.options3d.enabled = state;
 			optionsByYear.chart.options3d.enabled = state;
 
@@ -524,6 +524,7 @@
 
 	    	resetValues();
 		});
+		*/
 
 		
 		$('[data-toggle="tab"]').click(function(e) {
@@ -537,7 +538,7 @@
 				$('#btnGroup button').removeAttr('disabled');
 				$('#divBtn3D').show();
 				if(typeChart == 'line') deactivate3D();
-				if($('#btn3D').bootstrapSwitch('state')) $('#slider').show();
+				//if($('#btn3D').bootstrapSwitch('state')) $('#slider').show();
 				
 			}else if(href == "#tabYear"){
 				tabSelected = "tabYear";
@@ -547,7 +548,7 @@
 				$('#btnGroup button').removeAttr('disabled');
 				$('#divBtn3D').show();
 				if(typeChart == 'line') deactivate3D();
-				if($('#btn3D').bootstrapSwitch('state')) $('#slider').show();
+				//if($('#btn3D').bootstrapSwitch('state')) $('#slider').show();
 
 				
 			}else if(href == "#tabByCountry"){
@@ -709,7 +710,7 @@
 	    	resetValues();
 	    });
 
-	    function deactivate3D() {
+	    /*function deactivate3D() {
 	    	state = $('#btn3D').bootstrapSwitch('state');
 	    	if(state) $("#btn3D").bootstrapSwitch("toggleState");
 	    	$('#slider').hide();
@@ -718,7 +719,7 @@
 
 	    function activate3D() {
 	    	$('#divBtn3D').show();
-	    }
+	    }*/
 	    
 	    function showValues() {
 	        $('#R0-value').html(chartMonth.options.chart.options3d.alpha);
@@ -777,9 +778,9 @@
 			  	<button type="button" name="typeChart" id="btnTypeLine" class="btn btn-default">{translate key="plugins.generic.statistics.lines"}</button>
 			</div>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<div class="class-3d" id="divBtn3D" style="display: inline-block;">
+			<!--div class="class-3d" id="divBtn3D" style="display: inline-block;">
 				<input id="btn3D" type="checkbox" name="btn3D" data-label-text="3D" data-size="small">
-			</div>
+			</div-->
 		</div>
 	</div>
 </div>
