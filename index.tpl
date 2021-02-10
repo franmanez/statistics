@@ -28,475 +28,480 @@
 	var typeChart = "column";
 	var tabSelected = "tabMonth";
 
+	/***********************************************************
+	 *           			 CHARTS
+	 ***********************************************************/
+
+	//Chart Statistics month
+	var chartMonth;
+	var optionsMonth = {
+		chart: {
+	    renderTo: 'chartEstadisticasMonth',
+	    type: typeChart,
+	    options3d: {
+		enabled: false,
+		alpha: 10,
+		beta: 25,
+		depth: 70
+	    }
+	},
+	title: {
+		text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text()
+	},
+	subtitle: {
+	    text: '{/literal}{translate key="plugins.generic.statistics.byMonth"}{literal}'
+	},
+	xAxis: {
+	    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+	    crosshair: true
+	},
+	yAxis: {
+		min: 0,
+	    title: {
+			text: '{/literal}{translate key="plugins.generic.statistics.queryNumbers"}{literal}'
+	    }
+
+	},
+		tooltip: {
+	    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+		'<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+	    footerFormat: '</table>',
+	    shared: true,
+	    useHTML: true
+	},
+	plotOptions: {
+	    column: {
+		pointPadding: 0.2,
+		borderWidth: 0
+	    }
+	},
+
+	series: []
+	}
+	
+	//*******************************************************************************************
+		
+	//Chart statistics year
+	var chartByYear;
+	var optionsByYear = {
+		chart: {
+	    renderTo: 'chartEstadisticasByYear',
+	    type: typeChart,
+	    options3d: {
+		enabled: false,
+		alpha: 10,
+		beta: 25,
+		depth: 70
+	    }
+	},
+	title: {
+	    text: ''
+	},
+	subtitle: {
+	    text: '{/literal}{translate key="plugins.generic.statistics.lastYears2"}{literal}'
+	},
+	xAxis: {
+		categories: [],
+		crosshair: true
+	},
+	yAxis: {
+		min: 0,
+	    title: {
+			text: '{/literal}{translate key="plugins.generic.statistics.queryNumbers"}{literal}'
+	    }
+	},
+	tooltip: {
+	    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+		'<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+	    footerFormat: '</table>',
+	    shared: true,
+	    useHTML: true
+	},
+	plotOptions: {
+	    column: {
+		pointPadding: 0.2,
+		borderWidth: 0
+	    }
+	},
+	series: []
+	}
+
+
+	//*******************************************************************************************
+
+	var chartPaisesAbstract;
+
+	var optionsPaisesAbstract = {
+		chart: {
+	    renderTo: 'chartPaisesAbstract',
+	    options3d: {
+		enabled: true,
+		alpha: 45,
+		beta: 0
+	    }
+	},
+	title: {
+		text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text(),
+	},
+	tooltip: {
+	    pointFormat: '{series.name}: <b>{point.y} - {point.percentage:.1f}%</b>'
+	},
+	plotOptions: {
+	    pie: {
+		allowPointSelect: true,
+		cursor: 'pointer',
+		depth: 35,
+		dataLabels: {
+		    enabled: true,
+		    format: '{point.name} : {point.y}'
+		}
+	    }
+	},
+	series: [{
+		type: 'pie',
+		name: '{/literal}{translate key="plugins.generic.statistics.viewByCountries"}{literal}',
+	data: [
+	]
+    }]
+	}
+
+
+	//*******************************************************************************************
+
+	var chartPaisesDownload;
+
+	var optionsPaisesDownload = {
+		chart: {
+	    renderTo: 'chartPaisesDownload',
+	    options3d: {
+		enabled: true,
+		alpha: 45,
+		beta: 0
+	    }
+	},
+	title: {
+		text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text(),
+	},
+	tooltip: {
+	    pointFormat: '{series.name}: <b>{point.y} - {point.percentage:.1f}%</b>'
+	},
+	plotOptions: {
+	    pie: {
+		allowPointSelect: true,
+		cursor: 'pointer',
+		depth: 35,
+		dataLabels: {
+		    enabled: true,
+		    format: '{point.name} : {point.y}'
+		}
+	    }
+	},
+	series: [{
+		type: 'pie',
+		name: '{/literal}{translate key="plugins.generic.statistics.downloadByCountries"}{literal}',
+	data: [
+	]
+    }]
+	}
+
+
+	//*******************************************************************************************
+
+	var chartArticleDownload;
+
+	var optionsArticleDownload = {
+		chart: {
+	    renderTo: 'chartArticleDownload',
+	    options3d: {
+		enabled: true,
+		alpha: 45,
+		beta: 0
+	    }
+	},
+	title: {
+		text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text(),
+	},
+	tooltip: {
+	    pointFormat: '{series.name}: <b>{point.y} - {point.percentage:.1f}%</b>'
+	},
+	plotOptions: {
+	    pie: {
+		allowPointSelect: true,
+		cursor: 'pointer',
+		depth: 35,
+		dataLabels: {
+		    enabled: true,
+		    format: '{point.name} : {point.y}'
+		}
+	    }
+	},
+	series: [{
+		type: 'pie',
+		name: '{/literal}{translate key="plugins.generic.statistics.downloadByCountries"}{literal}',
+	data: [
+	]
+    }]
+	}
+
+	//*******************************************************************************************
+
+	var chartArticleAbstract;
+
+	var optionsArticleAbstract = {
+		chart: {
+	    renderTo: 'chartArticleAbstract',
+	    options3d: {
+		enabled: true,
+		alpha: 45,
+		beta: 0
+	    }
+	},
+	title: {
+		text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text(),
+	},
+	tooltip: {
+	    pointFormat: '{series.name}: <b>{point.y} - {point.percentage:.1f}%</b>'
+	},
+	plotOptions: {
+	    pie: {
+		allowPointSelect: true,
+		cursor: 'pointer',
+		depth: 35,
+		dataLabels: {
+		    enabled: true,
+		    format: '{point.name} : {point.y}'
+		}
+	    }
+	},
+	series: [{
+		type: 'pie',
+		name: '{/literal}{translate key="plugins.generic.statistics.viewAbstracts"}{literal}',
+	data: [
+	]
+    }]
+	}
+
+	//*******************************************************************************************
+
+	var chartIssues;
+
+	var optionsIssues = {
+		chart: {
+	    renderTo: 'chartIssues',
+	    options3d: {
+		enabled: true,
+		alpha: 45,
+		beta: 0
+	    }
+	},
+	title: {
+		text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text(),
+	},
+	tooltip: {
+	    pointFormat: '{series.name}: <b>{point.y} - {point.percentage:.1f}%</b>'
+	},
+	plotOptions: {
+	    pie: {
+		allowPointSelect: true,
+		cursor: 'pointer',
+		depth: 35,
+		dataLabels: {
+		    enabled: true,
+		    format: '{point.name} : {point.y}'
+		}
+	    }
+	},
+	series: [{
+		type: 'pie',
+		name: '{/literal}{translate key="plugins.generic.statistics.viewAbstracts"}{literal}',
+	data: [
+	]
+    }]
+	}
+	
+	
+	/***********************************************************
+	 *        			FUNCTIONS UPDATE DATA
+	 ***********************************************************/
+
+
+	//Chart MONTH 
+	function updateChartMonth() {
+		optionsMonth.title.text = '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal} '+$('#year').text();
+
+		jQuery.getJSON(base_location+'/getStatisticsByMonth?year='+$('#year').text(), null, function(data) {
+
+			optionsMonth.series = new Array(data.length);
+
+			for (var i = 0; i < data.length; i++){
+				optionsMonth.series[i] = new Object();
+				optionsMonth.series[i].name = data[i].name;
+				optionsMonth.series[i].data = data[i].values;
+			}
+
+
+			chartMonth = new Highcharts.Chart(optionsMonth);
+		});
+	};
+
+
+	//Chart YEAR
+	function updateChartByYear() {
+
+		$yearSelected = $('#year').text();
+		$yearSelected5 = $yearSelected-5;
+
+		optionsByYear.title.text = '{/literal}{translate key="plugins.generic.statistics.querysFrom"}{literal} '+$yearSelected5+' {/literal}{translate key="plugins.generic.statistics.querysTo"}{literal} '+$yearSelected,
+		optionsByYear.xAxis.categories = [$yearSelected-5,$yearSelected-4,$yearSelected-3,$yearSelected-2,$yearSelected-1,$yearSelected];
+
+		jQuery.getJSON(base_location+'/getStatisticsByYear?year='+$('#year').text(), null, function(data) {
+
+			optionsByYear.series = new Array(data.length);
+
+			for (var i = 0; i < data.length; i++){
+				optionsByYear.series[i] = new Object();
+				optionsByYear.series[i].name = data[i].name;
+				optionsByYear.series[i].data = data[i].values;
+			}
+
+			chartByYear = new Highcharts.Chart(optionsByYear);
+		});
+	};
+
+
+	//Chart COUNTRY ABSTRACT
+	function updateChartPaisesAbstract() {
+
+		optionsPaisesAbstract.title.text = '{/literal}{translate key="plugins.generic.statistics.viewAbstractsByCountry"}{literal} '+$('#year').text();
+
+		$yearSelected = $('#year').text();
+
+		jQuery.getJSON(base_location+'/getStatisticsByCountryAbstract?year='+$yearSelected, null, function(data) {
+
+			optionsPaisesAbstract.series[0].data = [];
+
+			for (var i = 0; i < data.length; i++){
+				optionsPaisesAbstract.series[0].data[i] = [data[i].country, parseInt(data[i].count)];
+			}
+
+
+			chartPaisesAbstract = new Highcharts.Chart(optionsPaisesAbstract);
+		});
+	};
+
+	//Chart COUNTRY DOWNLOAD
+	function updateChartPaisesDownload() {
+
+		optionsPaisesDownload.title.text = '{/literal}{translate key="plugins.generic.statistics.viewDownloads"}{literal} '+$('#year').text();
+
+		$yearSelected = $('#year').text();
+
+		jQuery.getJSON(base_location+'/getStatisticsByCountryDownload?year='+$yearSelected, null, function(data) {
+
+			optionsPaisesDownload.series[0].data = [];
+
+			for (var i = 0; i < data.length; i++){
+				optionsPaisesDownload.series[0].data[i] = [data[i].country, parseInt(data[i].count)];
+			}
+
+			chartPaisesDownload = new Highcharts.Chart(optionsPaisesDownload);
+		});
+	};
+
+	//Chart and list ARTICLE DOWNLOAD
+	function updateChartArticleDownload() {
+		optionsArticleDownload.title.text = '{/literal}{translate key="plugins.generic.statistics.rankingDownloadArticles"}{literal} '+$('#year').text();
+
+		$yearSelected = $('#year').text();
+
+		jQuery.getJSON(base_location+'/getStatisticsMostPopularDownload?year='+$yearSelected+"&type=260", null, function(data) {
+
+			optionsArticleDownload.series[0].data = [];
+
+			$("#tbodyDownload").html('');
+			for (var i = 0; i < data.length; i++){
+				optionsArticleDownload.series[0].data[i] = ["#"+(i+1), parseInt(data[i].count)];
+
+				$("#tbodyDownload").append( '<tr>'+
+						'<td class="text-center success">'+(i+1)+'</td>'+
+					    '<td class="text-left">'+data[i].article+'</td>'+
+					    '<td class="text-center">'+data[i].count+'</td>'+
+					'</tr>');
+			}
+
+			chartArticleDownload = new Highcharts.Chart(optionsArticleDownload);
+		});
+	};
+
+	//Chart and list ARTICLE ABSTRACT
+	function updateChartArticleAbstract() {
+
+		optionsArticleAbstract.title.text = '{/literal}{translate key="plugins.generic.statistics.rankingAbstractArticles"}{literal} '+$('#year').text();
+
+		$yearSelected = $('#year').text();
+
+		jQuery.getJSON(base_location+'/getStatisticsMostPopularDownload?year='+$yearSelected+"&type=257", null, function(data) {
+
+			optionsArticleAbstract.series[0].data = [];
+
+			$("#tbodyAbstract").html('');
+			for (var i = 0; i < data.length; i++){
+				optionsArticleAbstract.series[0].data[i] = ["#"+(i+1), parseInt(data[i].count)];
+
+				$("#tbodyAbstract").append( '<tr>'+
+						'<td class="text-center success">'+(i+1)+'</td>'+
+					    '<td class="text-left">'+data[i].article+'</td>'+
+					    '<td class="text-center">'+data[i].count+'</td>'+
+					'</tr>');
+			}
+
+			chartArticleAbstract = new Highcharts.Chart(optionsArticleAbstract);
+		});
+	};
+
+	//Chart and list ISSUES
+	function updateChartIssues() {
+
+		optionsIssues.title.text = '{/literal}{translate key="plugins.generic.statistics.rankingIssues"}{literal} '+$('#year').text();
+
+		$yearSelected = $('#year').text();
+
+		jQuery.getJSON(base_location+'/getStatisticsIssues?year='+$yearSelected, null, function(data) {
+
+			optionsIssues.series[0].data = [];
+
+			$("#tbodyIssues").html('');
+			for (var i = 0; i < data.length; i++){
+				optionsIssues.series[0].data[i] = ["Vol. "+data[i].volume+", Num. "+data[i].number+", Year "+data[i].year, parseInt(data[i].count)];
+
+				$("#tbodyIssues").append( '<tr>'+
+						'<td class="text-center success">'+(i+1)+'</td>'+
+						'<td class="text-center">'+data[i].volume+'</td>'+
+						'<td class="text-center">'+data[i].number+'</td>'+
+						'<td class="text-center">'+data[i].year+'</td>'+
+					    '<td class="text-left">'+data[i].name+'</td>'+
+					    '<td class="text-center">'+data[i].count+'</td>'+
+					'</tr>');
+			}
+
+			chartIssues = new Highcharts.Chart(optionsIssues);
+		});
+	};
+
+	
+	
+	
 	
 	$(document).ready(function() {
-		
-		
-		/***********************************************************
-		 *        			FUNCTIONS UPDATE DATA
-		 ***********************************************************/
-
-		
-		//Chart MONTH 
-		jQuery.fn.updateChartMonth = function() {
-			optionsMonth.title.text = '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal} '+$('#year').text();
-
-			jQuery.getJSON(base_location+'/getStatisticsByMonth?year='+$('#year').text(), null, function(data) {
-
-				optionsMonth.series = new Array(data.length);
-
-				for (var i = 0; i < data.length; i++){
-					optionsMonth.series[i] = new Object();
-					optionsMonth.series[i].name = data[i].name;
-					optionsMonth.series[i].data = data[i].values;
-				}
-
-				
-				chartMonth = new Highcharts.Chart(optionsMonth);
-			});
-		};
-
-
-		//Chart YEAR
-		jQuery.fn.updateChartByYear = function() {
-
-			$yearSelected = $('#year').text();
-			$yearSelected5 = $yearSelected-5;
-
-			optionsByYear.title.text = '{/literal}{translate key="plugins.generic.statistics.querysFrom"}{literal} '+$yearSelected5+' {/literal}{translate key="plugins.generic.statistics.querysTo"}{literal} '+$yearSelected,
-			optionsByYear.xAxis.categories = [$yearSelected-5,$yearSelected-4,$yearSelected-3,$yearSelected-2,$yearSelected-1,$yearSelected];
-
-			jQuery.getJSON(base_location+'/getStatisticsByYear?year='+$('#year').text(), null, function(data) {
-				
-				optionsByYear.series = new Array(data.length);
-
-				for (var i = 0; i < data.length; i++){
-					optionsByYear.series[i] = new Object();
-					optionsByYear.series[i].name = data[i].name;
-					optionsByYear.series[i].data = data[i].values;
-				}
-						
-				chartByYear = new Highcharts.Chart(optionsByYear);
-			});
-		};
-
-
-		//Chart COUNTRY ABSTRACT
-		jQuery.fn.updateChartPaisesAbstract = function() {
-
-			optionsPaisesAbstract.title.text = '{/literal}{translate key="plugins.generic.statistics.viewAbstractsByCountry"}{literal} '+$('#year').text();
 			
-			$yearSelected = $('#year').text();
-			
-			jQuery.getJSON(base_location+'/getStatisticsByCountryAbstract?year='+$yearSelected, null, function(data) {
-
-				optionsPaisesAbstract.series[0].data = [];
-
-				for (var i = 0; i < data.length; i++){
-					optionsPaisesAbstract.series[0].data[i] = [data[i].country, parseInt(data[i].count)];
-				}
-
-				
-				chartPaisesAbstract = new Highcharts.Chart(optionsPaisesAbstract);
-			});
-		};
-
-		//Chart COUNTRY DOWNLOAD
-		jQuery.fn.updateChartPaisesDownload = function() {
-
-			optionsPaisesDownload.title.text = '{/literal}{translate key="plugins.generic.statistics.viewDownloads"}{literal} '+$('#year').text();
-			
-			$yearSelected = $('#year').text();
-			
-			jQuery.getJSON(base_location+'/getStatisticsByCountryDownload?year='+$yearSelected, null, function(data) {
-
-				optionsPaisesDownload.series[0].data = [];
-
-				for (var i = 0; i < data.length; i++){
-					optionsPaisesDownload.series[0].data[i] = [data[i].country, parseInt(data[i].count)];
-				}
-
-				chartPaisesDownload = new Highcharts.Chart(optionsPaisesDownload);
-			});
-		};
-
-		//Chart and list ARTICLE DOWNLOAD
-		jQuery.fn.updateChartArticleDownload = function() {
-			optionsArticleDownload.title.text = '{/literal}{translate key="plugins.generic.statistics.rankingDownloadArticles"}{literal} '+$('#year').text();
-			
-			$yearSelected = $('#year').text();
-			
-			jQuery.getJSON(base_location+'/getStatisticsMostPopularDownload?year='+$yearSelected+"&type=260", null, function(data) {
-
-				optionsArticleDownload.series[0].data = [];
-
-				$("#tbodyDownload").html('');
-				for (var i = 0; i < data.length; i++){
-					optionsArticleDownload.series[0].data[i] = ["#"+(i+1), parseInt(data[i].count)];
-
-					$("#tbodyDownload").append( '<tr>'+
-							'<td class="text-center success">'+(i+1)+'</td>'+
-						    '<td class="text-left">'+data[i].article+'</td>'+
-						    '<td class="text-center">'+data[i].count+'</td>'+
-					      	'</tr>');
-				}
-
-				chartArticleDownload = new Highcharts.Chart(optionsArticleDownload);
-			});
-		};
-
-		//Chart and list ARTICLE ABSTRACT
-		jQuery.fn.updateChartArticleAbstract = function() {
-
-			optionsArticleAbstract.title.text = '{/literal}{translate key="plugins.generic.statistics.rankingAbstractArticles"}{literal} '+$('#year').text();
-			
-			$yearSelected = $('#year').text();
-			
-			jQuery.getJSON(base_location+'/getStatisticsMostPopularDownload?year='+$yearSelected+"&type=257", null, function(data) {
-
-				optionsArticleAbstract.series[0].data = [];
-
-				$("#tbodyAbstract").html('');
-				for (var i = 0; i < data.length; i++){
-					optionsArticleAbstract.series[0].data[i] = ["#"+(i+1), parseInt(data[i].count)];
-
-					$("#tbodyAbstract").append( '<tr>'+
-							'<td class="text-center success">'+(i+1)+'</td>'+
-						    '<td class="text-left">'+data[i].article+'</td>'+
-						    '<td class="text-center">'+data[i].count+'</td>'+
-					      	'</tr>');
-				}
-
-				chartArticleAbstract = new Highcharts.Chart(optionsArticleAbstract);
-			});
-		};
-
-		//Chart and list ISSUES
-		jQuery.fn.updateChartIssues = function() {
-
-			optionsIssues.title.text = '{/literal}{translate key="plugins.generic.statistics.rankingIssues"}{literal} '+$('#year').text();
-			
-			$yearSelected = $('#year').text();
-			
-			jQuery.getJSON(base_location+'/getStatisticsIssues?year='+$yearSelected, null, function(data) {
-
-				optionsIssues.series[0].data = [];
-
-				$("#tbodyIssues").html('');
-				for (var i = 0; i < data.length; i++){
-					optionsIssues.series[0].data[i] = ["Vol. "+data[i].volume+", Num. "+data[i].number+", Year "+data[i].year, parseInt(data[i].count)];
-
-					$("#tbodyIssues").append( '<tr>'+
-							'<td class="text-center success">'+(i+1)+'</td>'+
-							'<td class="text-center">'+data[i].volume+'</td>'+
-							'<td class="text-center">'+data[i].number+'</td>'+
-							'<td class="text-center">'+data[i].year+'</td>'+
-						    '<td class="text-left">'+data[i].name+'</td>'+
-						    '<td class="text-center">'+data[i].count+'</td>'+
-					      	'</tr>');
-				}
-
-				chartIssues = new Highcharts.Chart(optionsIssues);
-			});
-		};
-
-		
-		/***********************************************************
-		 *           			 CHARTS
-		 ***********************************************************/
-		
-		//Chart Statistics month
-		var chartMonth;
-		var optionsMonth = {
-			chart: {
-	            renderTo: 'chartEstadisticasMonth',
-	            type: typeChart,
-	            options3d: {
-	                enabled: false,
-	                alpha: 10,
-	                beta: 25,
-	                depth: 70
-	            }
-	        },
-	        title: {
-	        	text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text()
-	        },
-	        subtitle: {
-	            text: '{/literal}{translate key="plugins.generic.statistics.byMonth"}{literal}'
-	        },
-	        xAxis: {
-	            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-	            crosshair: true
-	        },
-	        yAxis: {
-		        min: 0,
-	            title: {
-	        		text: '{/literal}{translate key="plugins.generic.statistics.queryNumbers"}{literal}'
-	            }
-	            
-	        },
-			tooltip: {
-	            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-	            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-	                '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
-	            footerFormat: '</table>',
-	            shared: true,
-	            useHTML: true
-	        },
-	        plotOptions: {
-	            column: {
-	                pointPadding: 0.2,
-	                borderWidth: 0
-	            }
-	        },
-	       
-	        series: []
-		}
 
 		//onload page load chart by MONTH
-		jQuery.fn.updateChartMonth ();
+		updateChartMonth ();
 
 
-		//*******************************************************************************************
 		
-		//Chart statistics year
-		var chartByYear;
-		var optionsByYear = {
-			chart: {
-	            renderTo: 'chartEstadisticasByYear',
-	            type: typeChart,
-	            options3d: {
-	                enabled: false,
-	                alpha: 10,
-	                beta: 25,
-	                depth: 70
-	            }
-	        },
-	        title: {
-	            text: ''
-	        },
-	        subtitle: {
-	            text: '{/literal}{translate key="plugins.generic.statistics.lastYears2"}{literal}'
-	        },
-	        xAxis: {
-	        	categories: [],
-	        	crosshair: true
-	        },
-	        yAxis: {
-	        	min: 0,
-	            title: {
-	        		text: '{/literal}{translate key="plugins.generic.statistics.queryNumbers"}{literal}'
-	            }
-	        },
-	        tooltip: {
-	            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-	            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-	                '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
-	            footerFormat: '</table>',
-	            shared: true,
-	            useHTML: true
-	        },
-	        plotOptions: {
-	            column: {
-	                pointPadding: 0.2,
-	                borderWidth: 0
-	            }
-	        },
-	        series: []
-		}
-
-
-		//*******************************************************************************************
-
-		var chartPaisesAbstract;
-		
-		var optionsPaisesAbstract = {
-			chart: {
-	            renderTo: 'chartPaisesAbstract',
-	            options3d: {
-	                enabled: true,
-	                alpha: 45,
-	                beta: 0
-	            }
-	        },
-	        title: {
-	        	text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text(),
-	        },
-	        tooltip: {
-	            pointFormat: '{series.name}: <b>{point.y} - {point.percentage:.1f}%</b>'
-	        },
-	        plotOptions: {
-	            pie: {
-	                allowPointSelect: true,
-	                cursor: 'pointer',
-	                depth: 35,
-	                dataLabels: {
-	                    enabled: true,
-	                    format: '{point.name} : {point.y}'
-	                }
-	            }
-	        },
-	        series: [{
-	        	type: 'pie',
-	        	name: '{/literal}{translate key="plugins.generic.statistics.viewByCountries"}{literal}',
-                data: [
-                ]
-            }]
-		}
-
-
-		//*******************************************************************************************
-
-		var chartPaisesDownload;
-		
-		var optionsPaisesDownload = {
-			chart: {
-	            renderTo: 'chartPaisesDownload',
-	            options3d: {
-	                enabled: true,
-	                alpha: 45,
-	                beta: 0
-	            }
-	        },
-	        title: {
-	        	text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text(),
-	        },
-	        tooltip: {
-	            pointFormat: '{series.name}: <b>{point.y} - {point.percentage:.1f}%</b>'
-	        },
-	        plotOptions: {
-	            pie: {
-	                allowPointSelect: true,
-	                cursor: 'pointer',
-	                depth: 35,
-	                dataLabels: {
-	                    enabled: true,
-	                    format: '{point.name} : {point.y}'
-	                }
-	            }
-	        },
-	        series: [{
-	        	type: 'pie',
-	        	name: '{/literal}{translate key="plugins.generic.statistics.downloadByCountries"}{literal}',
-                data: [
-                ]
-            }]
-		}
-
-
-		//*******************************************************************************************
-
-		var chartArticleDownload;
-				
-		var optionsArticleDownload = {
-			chart: {
-	            renderTo: 'chartArticleDownload',
-	            options3d: {
-	                enabled: true,
-	                alpha: 45,
-	                beta: 0
-	            }
-	        },
-	        title: {
-	        	text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text(),
-	        },
-	        tooltip: {
-	            pointFormat: '{series.name}: <b>{point.y} - {point.percentage:.1f}%</b>'
-	        },
-	        plotOptions: {
-	            pie: {
-	                allowPointSelect: true,
-	                cursor: 'pointer',
-	                depth: 35,
-	                dataLabels: {
-	                    enabled: true,
-	                    format: '{point.name} : {point.y}'
-	                }
-	            }
-	        },
-	        series: [{
-	        	type: 'pie',
-	        	name: '{/literal}{translate key="plugins.generic.statistics.downloadByCountries"}{literal}',
-                data: [
-                ]
-            }]
-		}
-
-		//*******************************************************************************************
-
-		var chartArticleAbstract;
-				
-		var optionsArticleAbstract = {
-			chart: {
-	            renderTo: 'chartArticleAbstract',
-	            options3d: {
-	                enabled: true,
-	                alpha: 45,
-	                beta: 0
-	            }
-	        },
-	        title: {
-	        	text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text(),
-	        },
-	        tooltip: {
-	            pointFormat: '{series.name}: <b>{point.y} - {point.percentage:.1f}%</b>'
-	        },
-	        plotOptions: {
-	            pie: {
-	                allowPointSelect: true,
-	                cursor: 'pointer',
-	                depth: 35,
-	                dataLabels: {
-	                    enabled: true,
-	                    format: '{point.name} : {point.y}'
-	                }
-	            }
-	        },
-	        series: [{
-	        	type: 'pie',
-	        	name: '{/literal}{translate key="plugins.generic.statistics.viewAbstracts"}{literal}',
-                data: [
-                ]
-            }]
-		}
-
-		//*******************************************************************************************
-
-		var chartIssues;
-				
-		var optionsIssues = {
-			chart: {
-	            renderTo: 'chartIssues',
-	            options3d: {
-	                enabled: true,
-	                alpha: 45,
-	                beta: 0
-	            }
-	        },
-	        title: {
-	        	text: '{/literal}{translate key="plugins.generic.statistics.querysToTheJournal"}{literal}'+$('#year').text(),
-	        },
-	        tooltip: {
-	            pointFormat: '{series.name}: <b>{point.y} - {point.percentage:.1f}%</b>'
-	        },
-	        plotOptions: {
-	            pie: {
-	                allowPointSelect: true,
-	                cursor: 'pointer',
-	                depth: 35,
-	                dataLabels: {
-	                    enabled: true,
-	                    format: '{point.name} : {point.y}'
-	                }
-	            }
-	        },
-	        series: [{
-	        	type: 'pie',
-	        	name: '{/literal}{translate key="plugins.generic.statistics.viewAbstracts"}{literal}',
-                data: [
-                ]
-            }]
-		}
 
 
 		/***********************************************************
@@ -527,7 +532,7 @@
 			if(href == "#tabMonth"){
 				tabSelected = "tabMonth";
 				if(chartMonth) chartMonth.destroy();
-				jQuery.fn.updateChartMonth();
+				updateChartMonth();
 
 				$('#btnGroup button').removeAttr('disabled');
 				$('#divBtn3D').show();
@@ -537,7 +542,7 @@
 			}else if(href == "#tabYear"){
 				tabSelected = "tabYear";
 				if(chartByYear) chartByYear.destroy();
-				jQuery.fn.updateChartByYear();
+				updateChartByYear();
 				
 				$('#btnGroup button').removeAttr('disabled');
 				$('#divBtn3D').show();
@@ -549,8 +554,8 @@
 				tabSelected = "tabByCountry";
 				if(chartPaisesAbstract) chartPaisesAbstract.destroy();
 				if(chartPaisesDownload) chartPaisesDownload.destroy();
-				jQuery.fn.updateChartPaisesAbstract();
-				jQuery.fn.updateChartPaisesDownload();
+				updateChartPaisesAbstract();
+				updateChartPaisesDownload();
 				
 				$('#btnGroup button').attr('disabled','disabled');
 				$('#divBtn3D').hide();
@@ -559,7 +564,7 @@
 			}else if(href == "#tabArticleDownload"){
 				tabSelected = "tabArticleDownload";
 				if(chartArticleDownload) chartArticleDownload.destroy();
-				jQuery.fn.updateChartArticleDownload();
+				updateChartArticleDownload();
 				
 				$('#btnGroup button').attr('disabled','disabled');
 				$('#divBtn3D').hide();
@@ -568,7 +573,7 @@
 			}else if(href == "#tabArticleAbstract"){
 				tabSelected = "tabArticleAbstract";
 				if(chartArticleAbstract) chartArticleAbstract.destroy();
-				jQuery.fn.updateChartArticleAbstract();
+				updateChartArticleAbstract();
 
 				$('#btnGroup button').attr('disabled','disabled');
 				$('#divBtn3D').hide();
@@ -577,7 +582,7 @@
 			}else if(href == "#tabIssues"){
 				tabSelected = "tabIssues";
 				if(chartIssues) chartIssues.destroy();
-				jQuery.fn.updateChartIssues();
+				updateChartIssues();
 
 				$('#btnGroup button').attr('disabled','disabled');
 				$('#divBtn3D').hide();
